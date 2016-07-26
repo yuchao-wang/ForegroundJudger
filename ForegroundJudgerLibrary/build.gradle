@@ -20,24 +20,21 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.jaredrummler:android-processes:1.0.8'
 }
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'FinalDialog'
+    bintrayName = 'ForegroundJudger'
 
-    publishedGroupId = 'wang.yuchao.android.library.view.dialog'
+    publishedGroupId = 'wang.yuchao.android.library.process.foregroundjudger'
 
-    libraryName = 'FinalDialogLibrary'
-    artifact = 'FinalDialogLibrary'
+    libraryName = 'ForegroundJudgerLibrary'
+    artifact = 'ForegroundJudgerLibrary'
 
-    libraryDescription = 'Android Dialog Library'
+    libraryDescription = 'Android Foreground Library'
 
-    siteUrl = 'https://github.com/yuchao-wang/FinalDialog'
-    gitUrl = 'https://github.com/yuchao-wang/FinalDialog.git'
+    siteUrl = 'https://github.com/yuchao-wang/ForegroundJudger'
+    gitUrl = 'https://github.com/yuchao-wang/ForegroundJudger.git'
 
     libraryVersion = '1.0.0'
 

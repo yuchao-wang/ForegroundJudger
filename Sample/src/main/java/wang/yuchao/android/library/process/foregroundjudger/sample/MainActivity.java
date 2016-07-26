@@ -8,8 +8,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
+
+import com.jaredrummler.android.processes.AndroidProcesses;
+import com.jaredrummler.android.processes.models.AndroidAppProcess;
+
+import java.util.List;
 
 import wang.yuchao.android.library.process.foregroundjudger.ForegroundJudgerLibrary;
 
@@ -18,6 +24,19 @@ public class MainActivity extends AppCompatActivity {
     private NotificationManager notificationManager;
 
     private NotificationCompat.Builder builder;
+
+    /**
+     * @return 应用是否在前台
+     */
+    public static boolean isForegroundFromLinuxInfo(Context context, String packageName) {
+        List<AndroidAppProcess> processes = AndroidProcesses.getRunningForegroundApps(context);
+        for (AndroidAppProcess appProcess : processes) {
+            if (TextUtils.equals(appProcess.getPackageName(), packageName) && appProcess.foreground) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         result[2] = ForegroundJudgerLibrary.isForegroundFromApplication();
         result[3] = ForegroundJudgerLibrary.isForegroundFromUsageState(this, getPackageName());
         result[4] = ForegroundJudgerLibrary.isForegroundFromAccessibilityService(this, getPackageName());
-        result[5] = ForegroundJudgerLibrary.isForegroundFromLinuxInfo(this, getPackageName());
+        result[5] = isForegroundFromLinuxInfo(this, getPackageName());
 
         StringBuffer stringBuffer = new StringBuffer();
         for (int i = 0; i < result.length; i++) {

@@ -18,9 +18,6 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.jaredrummler.android.processes.AndroidProcesses;
-import com.jaredrummler.android.processes.models.AndroidAppProcess;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -70,7 +67,7 @@ public class ForegroundJudgerLibrary {
 
     /**
      * 注意：5.0此方法被废弃
-     * 需要权限：<uses-permission android:name="android.permission.GET_TASKS"/>
+     * 需要权限：android.permission.GET_TASKS
      *
      * @return 应用是否在前台
      */
@@ -120,10 +117,6 @@ public class ForegroundJudgerLibrary {
     /**
      * 注意：5.0以上有效
      * 1. AndroidManifest中加入此权限
-     * <uses-permission
-     * android:name="android.permission.PACKAGE_USAGE_STATS"
-     * xmlns:tools="http://schemas.android.com/tools"
-     * tools:ignore="ProtectedPermissions"/>
      * 2. 打开手机设置，点击安全-高级，在有权查看使用情况的应用中，为这个App打上勾
      *
      * @return 应用是否在前台
@@ -175,9 +168,8 @@ public class ForegroundJudgerLibrary {
 
     /**
      * 注意：由于AccessibilityService回调会在Activity onResume执行完了以后才会执行。因此在onResume中使用这个方法无效。
-     * <p>
-     * 1. 创建ACCESSIBILITY SERVICE INFO 属性文件
-     * 2. 注册 DETECTION SERVICE 到 AndroidManifest.xml
+     * 1. 创建 ACCESSIBILITY SERVICE INFO 属性文件
+     * 2. 注册 SERVICE 到 AndroidManifest.xml
      *
      * @return 应用是否在前台
      */
@@ -215,18 +207,4 @@ public class ForegroundJudgerLibrary {
         }
         return false;
     }
-
-    /**
-     * @return 应用是否在前台
-     */
-    public static boolean isForegroundFromLinuxInfo(Context context, String packageName) {
-        List<AndroidAppProcess> processes = AndroidProcesses.getRunningForegroundApps(context);
-        for (AndroidAppProcess appProcess : processes) {
-            if (TextUtils.equals(appProcess.getPackageName(), packageName) && appProcess.foreground) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }
