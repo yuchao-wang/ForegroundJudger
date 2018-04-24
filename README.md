@@ -22,7 +22,7 @@ Android Foreground Background Judger Process
 ### How To Use
 **dependence**
 ```
-compile 'wang.yuchao.android.library.view.circleprogressbar:CircleProgressBarLibrary:1.0.0'
+compile 'wang.yuchao.android.library.process.foregroundjudger:ForegroundJudgerLibrary:1.0.0'
 ```
 
 **Application init**
